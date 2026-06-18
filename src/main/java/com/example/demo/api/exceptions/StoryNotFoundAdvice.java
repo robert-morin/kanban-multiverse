@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.example.demo.domain.exceptions.StoryNotFoundException;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class StoryNotFoundAdvice {
 
     @ExceptionHandler(value = StoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody ErrorResponse handleException(StoryNotFoundException ex) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getClass().getSimpleName(), ex.getMessage());
     }
 }

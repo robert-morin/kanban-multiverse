@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ErrorResponse {
     public int statusCode;
+    public String type;
     public String description;
 }
