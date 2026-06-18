@@ -1,14 +1,11 @@
 package com.example.demo.api.exceptions;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorResponse {
     public int statusCode;
     public String description;
-
-    public ErrorResponse() {
-    }
-
-    public ErrorResponse(int statusCode, String description) {
-        this.statusCode = statusCode;
-        this.description = description;
-    }
 }
