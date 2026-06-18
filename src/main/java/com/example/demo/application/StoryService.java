@@ -1,27 +1,28 @@
 package com.example.demo.application;
 
-import com.example.demo.domain.Story;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.domain.StoryRepository;
 import com.example.demo.domain.exceptions.StoryNotFoundException;
 
+@Service
 public class StoryService {
-    // TODO repository
-    private Story[] stories = new Story[] {
-        new Story(1L, "Story 1", "This is a description of story 1.", new String[] {"tag1", "tag2"}, "owner1", "open", java.time.LocalDate.now(), java.time.LocalDate.now(), 5),
-        new Story(2L, "Story 2", "This is a description of story 2.", new String[] {"tag3", "tag4"}, "owner2", "closed", java.time.LocalDate.now(), java.time.LocalDate.now(), 8)
-    };
 
+    private StoryRepository storyRepository;
     private StoryAssembler storyAssembler = new StoryAssembler();
 
+    public StoryService(StoryRepository repository) {
+        this.storyRepository = repository;
+    }
+
     public StoryDto[] getAllStories() {
-        return java.util.Arrays.stream(stories)
+        return storyRepository.findAll().stream()
             .map(story -> storyAssembler.toDto(story))
             .toArray(StoryDto[]::new);
     }
 
     public StoryDto getStoryById(Long id) {
-        return java.util.Arrays.stream(stories)
-            .filter(story -> story.getId().equals(id))
-            .findFirst()
+        return storyRepository.findById(id)
             .map(story -> storyAssembler.toDto(story))
             .orElseThrow(() -> new StoryNotFoundException());
     }

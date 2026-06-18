@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoryController {
   //private final AtomicLong counter = new AtomicLong();
 
-  private StoryService storyService = new StoryService();
+  private StoryService storyService;
+
+  public StoryController(StoryService storyService) {
+    this.storyService = storyService;
+  }
 
   @GetMapping("/stories")
   public StoryDto[] stories() {
