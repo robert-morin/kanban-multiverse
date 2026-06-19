@@ -28,9 +28,38 @@ public class StoryService {
             .orElseThrow(() -> new StoryNotFoundException());
     }
 
-    public StoryDto createStory(NewStoryDto newStoryDto) {
+    public StoryDto createStory(StoryContentsDto newStoryDto) {
         Story newStory = storyAssembler.toEntity(newStoryDto);
         Story savedStory = storyRepository.save(newStory);
+        return storyAssembler.toDto(savedStory);
+    }
+
+    public String getUpdatedValue(String oldValue, String newValue) {
+        return newValue != null && !newValue.trim().isEmpty() ? newValue : oldValue;
+    }
+
+    public <T> T getUpdatedValue(T oldValue, T newValue) {
+        return newValue != null ? newValue : oldValue;
+    }
+
+    public StoryDto updateStory(Long id, StoryContentsDto updatedStoryDto) {
+        Story existingStory = storyRepository.findById(id)
+            .orElseThrow(() -> new StoryNotFoundException());
+
+        Story updatedStory = new Story(
+            id, 
+            getUpdatedValue(existingStory.getTitle(), updatedStoryDto.title),
+            getUpdatedValue(existingStory.getDescription(), updatedStoryDto.description),
+            getUpdatedValue(existingStory.getTags(), updatedStoryDto.tags),
+            getUpdatedValue(existingStory.getOwner(), updatedStoryDto.owner),
+            getUpdatedValue(existingStory.getStatus(), updatedStoryDto.status),
+            existingStory.getCreationDate(),
+            existingStory.getStatus().equals(updatedStoryDto.status) ?
+                existingStory.getLastStatusUpdateDate() :
+                java.time.LocalDate.now(),
+            getUpdatedValue(existingStory.getPoints(), updatedStoryDto.points));
+
+        Story savedStory = storyRepository.save(updatedStory);
         return storyAssembler.toDto(savedStory);
     }
 }

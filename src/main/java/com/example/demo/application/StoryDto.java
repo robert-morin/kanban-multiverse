@@ -8,8 +8,8 @@ public record StoryDto(
     String description,
     String[] tags,
     String owner,
-    String state,
+    String status,
     LocalDate creationDate,
-    LocalDate lastUpdateDate,
-    int points) {
+    LocalDate lastStatusUpdateDate,
+    Integer points) {
 }

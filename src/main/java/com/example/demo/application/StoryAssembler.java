@@ -15,13 +15,13 @@ public class StoryAssembler {
             story.getDescription(),
             story.getTags(),
             story.getOwner(),
-            story.getState(),
+            story.getStatus(),
             story.getCreationDate(),
-            story.getLastUpdateDate(),
+            story.getLastStatusUpdateDate(),
             story.getPoints());
     }
 
-    public Story toEntity(NewStoryDto newStoryDto) {
+    public Story toEntity(StoryContentsDto newStoryDto) {
         long id = Math.abs(secureRandom.nextLong());
         LocalDate now = java.time.LocalDate.now();
 

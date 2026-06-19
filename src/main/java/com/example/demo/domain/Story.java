@@ -23,8 +23,8 @@ public class Story {
     private String description;
     private String[] tags;
     private String owner;
-    private String state;
+    private String status;
     private LocalDate creationDate;
-    private LocalDate lastUpdateDate;
-    private int points;
+    private LocalDate lastStatusUpdateDate;
+    private Integer points;
 }
