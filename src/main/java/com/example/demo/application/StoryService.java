@@ -62,4 +62,10 @@ public class StoryService {
         Story savedStory = storyRepository.save(updatedStory);
         return storyAssembler.toDto(savedStory);
     }
+
+    public void deleteStory(Long id) {
+        Story existingStory = storyRepository.findById(id)
+            .orElseThrow(() -> new StoryNotFoundException());
+        storyRepository.delete(existingStory);
+    }
 }

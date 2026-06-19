@@ -2,11 +2,14 @@ package com.example.demo.api;
 
 import com.example.demo.application.*;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,6 +34,7 @@ public class StoryController {
   }
 
   @PostMapping("/story")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public StoryDto createStory(@RequestBody StoryContentsDto newStoryDto) {
     newStoryDtoValidator.validate(newStoryDto);
     return storyService.createStory(newStoryDto);
@@ -39,5 +43,11 @@ public class StoryController {
   @PutMapping("/story/{id}")
   public StoryDto updateStory(@PathVariable Long id, @RequestBody StoryContentsDto updatedStoryDto) {
     return storyService.updateStory(id, updatedStoryDto);
+  }
+
+  @DeleteMapping("/story/{id}")
+  public StoryDto deleteStory(@PathVariable Long id) {
+    storyService.deleteStory(id);
+    return null;
   }
 }
