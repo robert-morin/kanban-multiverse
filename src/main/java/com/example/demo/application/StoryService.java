@@ -2,6 +2,7 @@ package com.example.demo.application;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.Story;
 import com.example.demo.domain.StoryRepository;
 import com.example.demo.domain.exceptions.StoryNotFoundException;
 
@@ -25,5 +26,11 @@ public class StoryService {
         return storyRepository.findById(id)
             .map(story -> storyAssembler.toDto(story))
             .orElseThrow(() -> new StoryNotFoundException());
+    }
+
+    public StoryDto createStory(NewStoryDto newStoryDto) {
+        Story newStory = storyAssembler.toEntity(newStoryDto);
+        Story savedStory = storyRepository.save(newStory);
+        return storyAssembler.toDto(savedStory);
     }
 }
