@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { BoardDefinition } from '../domain/BoardDefinition';
 import type { Story } from '../domain/story';
 import { createBoard } from '../domain/Board';
@@ -60,11 +60,29 @@ export function UseTestBoardApi() {
         ]
     });
 
-    function getBoard(): Promise<Response> {
-        return Promise.resolve(new Response(
-            JSON.stringify(createBoard(boardDefinition, stories)),
-            { status: 200, statusText: 'OK' }));
+    const [board, setBoard] = useState(() => createBoard(boardDefinition, stories));
+
+    const isLoading = false;
+    const error = null;
+
+    function moveStory(storyId: number, newStatus: string): Promise<void> {
+        setStories(prevStories => {
+      const updatedStories = prevStories.map(story =>
+        story.id === storyId
+          ? {
+              ...story,
+              status: newStatus,
+              lastStatusUpdateDate: new Date(),
+            }
+          : story
+      );
+
+      setBoard(createBoard(boardDefinition, updatedStories));
+      return updatedStories;
+    });
+
+        return Promise.resolve();
     }
 
-    return { getBoard }
+    return { board, isLoading, error, moveStory }
 }

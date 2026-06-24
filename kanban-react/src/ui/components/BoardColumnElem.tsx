@@ -3,15 +3,16 @@ import '../css/BoardColumn.css';
 import StoryEntryElem from "./StoryEntryElem";
 
 type BoardColumnProps = {
-    column: BoardColumn
+    column: BoardColumn,
+    moveStory: (storyId: number, newStatus: string) =>Promise<void>
 }
 
-export default function BoardColumnElem({ column }: BoardColumnProps) {
-    function onDrop(ev : React.DragEvent<HTMLDivElement>) {
+export default function BoardColumnElem({ column, moveStory }: BoardColumnProps) {
+    async function onDrop(ev : React.DragEvent<HTMLDivElement>) {
         ev.preventDefault();
-        const data = ev.dataTransfer?.getData("text/html");
+        const data = ev.dataTransfer?.getData("text/plain");
         console.log(`Dropped ${data} onto column ${column.id}`);
-        // todo fetch to update the story's column in the backend
+        await moveStory(parseInt(data), column.title)
     }
 
     return (

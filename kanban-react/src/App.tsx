@@ -2,10 +2,10 @@ import { UseTestBoardApi } from "./test/useTestBoardApi";
 import BoardElem from "./ui/components/BoardElem";
 
 const App = () => {
-    const { getBoard } = UseTestBoardApi();
+    const { board, isLoading, error, moveStory } = UseTestBoardApi();
 
     return (
-        <BoardElem getBoard={getBoard} />
+        <BoardElem board={board} isLoading={isLoading} error={error} moveStory={moveStory} />
     );
 }
 

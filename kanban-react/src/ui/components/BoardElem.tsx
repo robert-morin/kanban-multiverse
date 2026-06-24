@@ -1,15 +1,15 @@
 import type { Board } from "../../domain/Board";
 import BoardColumnElem from "./BoardColumnElem";
 import '../css/Board.css';
-import { useFetchItem } from "../hooks/UseFetchItem";
 
 type BoardProps = {
-    getBoard: () => Promise<Response>
+    board: Board,
+    isLoading: boolean,
+    error: string | null,
+    moveStory: (storyId: number, newStatus: string) =>Promise<void>
 }
 
-const BoardElem = ({ getBoard }: BoardProps) => {
-    const {isLoading, item, error} = useFetchItem<Board>(getBoard)
-
+const BoardElem = ({ board, isLoading, error, moveStory }: BoardProps) => {
     return (
         <div className="board">
             {error && (
@@ -19,10 +19,10 @@ const BoardElem = ({ getBoard }: BoardProps) => {
                 <p>Loading. Please Wait...</p>
             ) : (
                 <>
-                    <h2>{item?.name}</h2>
+                    <h2>{board.name}</h2>
                     <div className="board-columns">
-                        {item?.columns.map((column) => (
-                        <BoardColumnElem key={column.id} column={column} />
+                        {board.columns.map((column) => (
+                        <BoardColumnElem key={column.id} column={column} moveStory={moveStory} />
                         ))}
                     </div>
                 </>

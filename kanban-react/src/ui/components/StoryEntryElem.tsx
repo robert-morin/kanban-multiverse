@@ -7,10 +7,10 @@ type StoryEntryProps = {
 
 export default function StoryEntryEntry({ story }: StoryEntryProps) {
   function dragstartHandler(ev: React.DragEvent<HTMLDivElement>) {
-    ev.dataTransfer.setData("text/html", ev?.currentTarget.outerHTML);
+    ev.dataTransfer.setData("text/plain", ev?.currentTarget.id);
   }
   return (
-    <div className="story-entry" draggable onDragStart={dragstartHandler}>
+    <div className="story-entry" draggable onDragStart={dragstartHandler} id={story.id.toString()}>
         <p className="title">{story.title}</p>
         <p>{story.owner}</p>
     </div>
