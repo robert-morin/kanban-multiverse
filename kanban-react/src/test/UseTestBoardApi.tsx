@@ -1,7 +1,26 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { BoardDefinition } from '../domain/BoardDefinition';
-import type { Story } from '../domain/story';
+import type { Story } from '../domain/Story';
 import { createBoard } from '../domain/Board';
+
+const boardDefinition: BoardDefinition = {
+    id: 1,
+    name: 'Example Board',
+    columns: [
+        {
+            id: 1,
+            title: 'To Do'
+        },
+        {
+            id: 2,
+            title: 'In Progress'
+        },
+        {
+            id: 3,
+            title: 'Done'
+        }
+    ]
+};
 
 // Todo column Ids?
 export function UseTestBoardApi() {
@@ -41,45 +60,19 @@ export function UseTestBoardApi() {
         },
     ]);
 
-    const [boardDefinition, setBoardDefinition] = useState<BoardDefinition>({
-        id: 1,
-        name: 'Example Board',
-        columns: [
-            {
-                id: 1,
-                title: 'To Do'
-            },
-            {
-                id: 2,
-                title: 'In Progress'
-            },
-            {
-                id: 3,
-                title: 'Done'
-            }
-        ]
-    });
-
-    const [board, setBoard] = useState(() => createBoard(boardDefinition, stories));
+    const board = useMemo(() => createBoard(boardDefinition, stories), [stories]);
 
     const isLoading = false;
     const error = null;
 
     function moveStory(storyId: number, newStatus: string): Promise<void> {
-        setStories(prevStories => {
-      const updatedStories = prevStories.map(story =>
-        story.id === storyId
-          ? {
-              ...story,
-              status: newStatus,
-              lastStatusUpdateDate: new Date(),
-            }
-          : story
-      );
-
-      setBoard(createBoard(boardDefinition, updatedStories));
-      return updatedStories;
-    });
+        setStories(prevStories =>
+            prevStories.map(story =>
+                story.id === storyId
+                    ? { ...story, status: newStatus, lastStatusUpdateDate: new Date() }
+                    : story
+            )
+        );
 
         return Promise.resolve();
     }

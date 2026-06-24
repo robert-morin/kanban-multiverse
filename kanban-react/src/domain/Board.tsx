@@ -1,6 +1,6 @@
 import type { BoardColumn } from "./BoardColumn"
 import type { BoardDefinition } from "./BoardDefinition";
-import type { Story } from "./story";
+import type { Story } from "./Story";
 
 export type Board = {
     id: number,

@@ -1,4 +1,4 @@
-import { UseTestBoardApi } from "./test/useTestBoardApi";
+import { UseTestBoardApi } from "./test/UseTestBoardApi";
 import BoardElem from "./ui/components/BoardElem";
 
 const App = () => {
