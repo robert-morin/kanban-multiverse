@@ -1,0 +1,13 @@
+.board-column {
+    padding: 16px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.board-column > .title {
+    padding-bottom: 8px;
+    border-bottom: 2px solid black;
+}

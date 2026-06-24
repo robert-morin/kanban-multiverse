@@ -1,0 +1,13 @@
+.board {
+    margin: 16px;
+    box-shadow:
+    0 0 0 2px hsl(0, 76%, 3%),
+    0 0 0 13px hsl(32, 65%, 34%),
+    0 0 0 15px hsl(0, 76%, 3%);
+}
+
+.board-columns {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
