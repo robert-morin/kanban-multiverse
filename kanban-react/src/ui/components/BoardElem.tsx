@@ -4,14 +4,14 @@ import '../css/Board.css';
 import { useTestHook } from "../hooks/UseTestHook";
 
 type BoardProps = {
-    board: Board,
+    //board: Board,
     isLoading: boolean,
     error: string | null,
-    moveStory: (storyId: number, newStatus: string) =>Promise<void>
+    //moveStory: (storyId: number, newStatus: string) =>Promise<void>
 }
 
-const BoardElem = ({ board, isLoading, error, moveStory }: BoardProps) => {
-    const [value, increment] = useTestHook();
+const BoardElem = ({ isLoading, error }: BoardProps) => {
+    const [stories, board, moveStory] = useTestHook();
 
     return (
         <div className="board">
@@ -23,8 +23,8 @@ const BoardElem = ({ board, isLoading, error, moveStory }: BoardProps) => {
             ) : (
                 <>
                     <h2>{board.name}</h2>
-                    <p>{value} stories</p>
-                    <button onClick={increment}>Increment</button>
+                    <p>{stories.length} stories</p>
+                    <button onClick={() => moveStory(1, 'In Progress')}>Increment</button>
                     <div className="board-columns">
                         {board.columns.map((column) => (
                         <BoardColumnElem key={column.id} column={column} moveStory={moveStory} />

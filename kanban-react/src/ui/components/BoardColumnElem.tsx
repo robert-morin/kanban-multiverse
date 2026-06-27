@@ -4,7 +4,7 @@ import StoryEntryElem from "./StoryEntryElem";
 
 type BoardColumnProps = {
     column: BoardColumn,
-    moveStory: (storyId: number, newStatus: string) =>Promise<void>
+    moveStory: (storyId: number, newStatus: string) => void
 }
 
 export default function BoardColumnElem({ column, moveStory }: BoardColumnProps) {
@@ -12,7 +12,7 @@ export default function BoardColumnElem({ column, moveStory }: BoardColumnProps)
         ev.preventDefault();
         const data = ev.dataTransfer?.getData("text/plain");
         console.log(`Dropped ${data} onto column ${column.id}`);
-        await moveStory(parseInt(data), column.title)
+        moveStory(parseInt(data), column.title)
     }
 
     return (
