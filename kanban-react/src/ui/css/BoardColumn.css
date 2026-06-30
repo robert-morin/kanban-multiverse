@@ -1,13 +1,60 @@
 .board-column {
     padding: 16px;
-    width: 300px;
+    background-color: var(--social-bg);
+    border-radius: 12px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     align-items: stretch;
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
 }
 
-.board-column > .title {
+.board-column.dragging-over {
+    background-color: var(--accent-bg);
+    border-color: var(--accent-border);
+    box-shadow: 0 4px 12px var(--accent-bg);
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
     padding-bottom: 8px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid var(--border);
+}
+
+.column-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-h);
+    letter-spacing: 0.5px;
+}
+
+.column-badge {
+    background-color: var(--border);
+    color: var(--text-h);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    line-height: 1.5;
+}
+
+.column-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 100px;
+}
+
+@media (max-width: 900px) {
+    .board-column {
+        max-width: none;
+    }
 }
