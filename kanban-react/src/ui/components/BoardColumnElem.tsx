@@ -4,10 +4,11 @@ import StoryEntryElem from "./StoryEntryElem";
 
 type BoardColumnProps = {
     column: BoardColumn,
-    moveStory: (storyId: number, newStatus: string) => void
+    moveStory: (storyId: number, newStatus: string) => void,
+    onSelectStory?: (storyId: number) => void
 }
 
-export default function BoardColumnElem({ column, moveStory }: BoardColumnProps) {
+export default function BoardColumnElem({ column, moveStory, onSelectStory }: BoardColumnProps) {
     async function onDrop(ev : React.DragEvent<HTMLDivElement>) {
         ev.preventDefault();
         const data = ev.dataTransfer?.getData("text/plain");
@@ -19,8 +20,8 @@ export default function BoardColumnElem({ column, moveStory }: BoardColumnProps)
         <div className="board-column" onDragOver={(event) => event.preventDefault()} onDrop={onDrop}>
             <h2 className="title">{column.title}</h2>
             {column.stories.map((story) => (
-                <StoryEntryElem key={story.id} story={story} />
+                <StoryEntryElem key={story.id} story={story} onSelect={onSelectStory} />
             ))}
         </div>
     );
-};
+};

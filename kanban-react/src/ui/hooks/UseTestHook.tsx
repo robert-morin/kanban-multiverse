@@ -63,12 +63,6 @@ export function useTestHook() {
     const [stories, setStories] = useState<Story[]>(defaultStories);
     const [board, setBoard] = useState<Board>(createBoard(boardDefinition, stories));
 
-
-    const increment = () => {
-        setStories(_ => []);
-        setBoard(_ => createBoard(boardDefinition, []));
-    };
-
     function moveStory(storyId: number, newStatus: string) {
         const updatedStories = stories.map(story => {
             if (story.id === storyId) {
@@ -85,5 +79,18 @@ export function useTestHook() {
         setBoard(_ => createBoard(boardDefinition, updatedStories));
     }
 
-    return [stories, board, moveStory] as const;
+    function updateStory(updatedStory: Story) {
+        const updatedStories = stories.map(story => {
+            if (story.id === updatedStory.id) {
+                console.log(`Updating story ${updatedStory.id}`, updatedStory);
+                return updatedStory;
+            }
+            return story;
+        });
+        setStories(_ => updatedStories);
+        setBoard(_ => createBoard(boardDefinition, updatedStories));
+    }
+
+    return [stories, board, moveStory, updateStory] as const;
 }
+

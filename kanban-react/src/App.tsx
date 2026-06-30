@@ -1,12 +1,10 @@
-import { UseTestBoardApi } from "./test/UseTestBoardApi";
 import BoardElem from "./ui/components/BoardElem";
 
 const App = () => {
-    const { board, isLoading, error, moveStory } = UseTestBoardApi();
-
     return (
-        <BoardElem board={board} isLoading={isLoading} error={error} moveStory={moveStory} />
+        <BoardElem isLoading={false} error={null} />
     );
 }
 
-export default App
+export default App;
+
