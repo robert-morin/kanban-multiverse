@@ -1,0 +1,245 @@
+.story-details {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: var(--shadow);
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-details>.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+
+    margin: 0;
+    font-size: 22px;
+    color: var(--text-h);
+}
+
+.story-details>form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.row {
+    flex-direction: row;
+    gap: 16px;
+}
+
+.form-group.row>* {
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: var(--bg);
+    color: var(--text-h);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: var(--sans);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+
+.error-message {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Tag Editor Styling */
+.tags-editor-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.tag-remove-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.tag-remove-btn:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+.tag-input-container {
+    display: flex;
+    gap: 8px;
+}
+
+.tag-input {
+    flex: 1;
+}
+
+.btn-secondary-sm {
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary-sm:hover {
+    border-color: var(--text);
+    color: var(--text-h);
+}
+
+/* Action Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-bg);
+    filter: brightness(1.1);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text);
+    color: var(--text-h);
+    background-color: var(--social-bg);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Modal Overlay Styling */
+.story-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
