@@ -91,6 +91,12 @@ export function useTestHook() {
         setBoard(_ => createBoard(boardDefinition, updatedStories));
     }
 
-    return [stories, board, moveStory, updateStory] as const;
+    function deleteStory(storyId: number) {
+        const updatedStories = stories.filter(story => story.id !== storyId);
+        setStories(_ => updatedStories);
+        setBoard(_ => createBoard(boardDefinition, updatedStories));
+    }
+
+    return [stories, board, moveStory, updateStory, deleteStory] as const;
 }
 

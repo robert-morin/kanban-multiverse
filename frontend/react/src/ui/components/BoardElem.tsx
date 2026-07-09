@@ -11,7 +11,7 @@ type BoardProps = {
 }
 
 const BoardElem = ({ isLoading, error }: BoardProps) => {
-    const [stories, board, moveStory, updateStory] = useTestHook();
+    const [stories, board, moveStory, updateStory, deleteStory] = useTestHook();
     const [selectedStoryId, setSelectedStoryId] = useState<number | null>(null);
 
     const selectedStory = stories.find(s => s.id === selectedStoryId);
@@ -47,6 +47,10 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
                             story={selectedStory}
                             onSave={(updated: Story) => {
                                 updateStory(updated);
+                                setSelectedStoryId(null);
+                            }}
+                            onDelete={(storyId: number) => {
+                                deleteStory(storyId);
                                 setSelectedStoryId(null);
                             }}
                             onCancel={() => setSelectedStoryId(null)}

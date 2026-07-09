@@ -211,6 +211,23 @@
     background-color: var(--social-bg);
 }
 
+.btn-danger {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #dc2626;
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.btn-danger:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+}
+
 .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;

@@ -5,10 +5,11 @@ import '../css/StoryDetails.css';
 type StoryDetailsElemProps = {
     story: Story;
     onSave?: (updatedStory: Story) => void;
+    onDelete?: (storyId: number) => void;
     onCancel?: () => void;
 }
 
-export function StoryDetailsElem({ story, onSave, onCancel }: StoryDetailsElemProps) {
+export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDetailsElemProps) {
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
     const [owner, setOwner] = useState(story.owner);
@@ -77,6 +78,13 @@ export function StoryDetailsElem({ story, onSave, onCancel }: StoryDetailsElemPr
                 lastStatusUpdateDate: status !== story.status ? new Date() : story.lastStatusUpdateDate
             };
             onSave(updatedStory);
+        }
+    };
+
+    const handleDelete = () => {
+        const confirmed = window.confirm(`Delete story "${title.trim() || story.title}"?`);
+        if (confirmed && onDelete) {
+            onDelete(story.id);
         }
     };
 
@@ -188,6 +196,11 @@ export function StoryDetailsElem({ story, onSave, onCancel }: StoryDetailsElemPr
 
                 {/* Form Actions */}
                 <div className="form-actions">
+                    {onDelete && (
+                        <button type="button" className="btn-danger" onClick={handleDelete}>
+                            Delete Story
+                        </button>
+                    )}
                     {onCancel && (
                         <button type="button" className="btn-secondary" onClick={onCancel}>
                             Cancel

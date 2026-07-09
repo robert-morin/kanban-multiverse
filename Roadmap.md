@@ -11,6 +11,9 @@ In no particular order.
     - C#
     - Python
     - PHP
+    - C++
+    - OCaml ?
+    - Prolog ???
     - ...
 - Alternate frontend:
     - VueJS
