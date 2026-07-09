@@ -4,12 +4,14 @@ import '../css/StoryDetails.css';
 
 type StoryDetailsElemProps = {
     story: Story;
+    mode?: 'edit' | 'create';
     onSave?: (updatedStory: Story) => void;
+    onCreate?: (newStory: Story) => void;
     onDelete?: (storyId: number) => void;
     onCancel?: () => void;
 }
 
-export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDetailsElemProps) {
+export function StoryDetailsElem({ story, mode = 'edit', onSave, onCreate, onDelete, onCancel }: StoryDetailsElemProps) {
     const [title, setTitle] = useState(story.title);
     const [description, setDescription] = useState(story.description);
     const [owner, setOwner] = useState(story.owner);
@@ -66,18 +68,26 @@ export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDet
         e.preventDefault();
         if (!validate()) return;
 
+        const storyToSubmit: Story = {
+            ...story,
+            title: title.trim(),
+            description: description.trim(),
+            owner: owner.trim(),
+            status,
+            points: Number(points),
+            tags,
+            lastStatusUpdateDate: status !== story.status ? new Date() : story.lastStatusUpdateDate
+        };
+
+        if (mode === 'create') {
+            if (onCreate) {
+                onCreate(storyToSubmit);
+            }
+            return;
+        }
+
         if (onSave) {
-            const updatedStory: Story = {
-                ...story,
-                title: title.trim(),
-                description: description.trim(),
-                owner: owner.trim(),
-                status,
-                points: Number(points),
-                tags,
-                lastStatusUpdateDate: status !== story.status ? new Date() : story.lastStatusUpdateDate
-            };
-            onSave(updatedStory);
+            onSave(storyToSubmit);
         }
     };
 
@@ -88,9 +98,11 @@ export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDet
         }
     };
 
+    const isCreateMode = mode === 'create';
+
     return (
         <div className="story-details">
-            <h3 className="title">Edit Story #{story.id}</h3>
+            <h3 className="title">{isCreateMode ? 'Create Story' : `Edit Story #${story.id}`}</h3>
 
             <form onSubmit={handleSubmit}>
                 {/* Title Input */}
@@ -196,7 +208,7 @@ export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDet
 
                 {/* Form Actions */}
                 <div className="form-actions">
-                    {onDelete && (
+                    {!isCreateMode && onDelete && (
                         <button type="button" className="btn-danger" onClick={handleDelete}>
                             Delete Story
                         </button>
@@ -207,7 +219,7 @@ export function StoryDetailsElem({ story, onSave, onDelete, onCancel }: StoryDet
                         </button>
                     )}
                     <button type="submit" className="btn-primary">
-                        Save Changes
+                        {isCreateMode ? 'Create Story' : 'Save Changes'}
                     </button>
                 </div>
             </form>

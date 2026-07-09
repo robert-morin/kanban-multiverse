@@ -97,6 +97,12 @@ export function useTestHook() {
         setBoard(_ => createBoard(boardDefinition, updatedStories));
     }
 
-    return [stories, board, moveStory, updateStory, deleteStory] as const;
+    function createStory(newStory: Story) {
+        const updatedStories = [...stories, newStory];
+        setStories(_ => updatedStories);
+        setBoard(_ => createBoard(boardDefinition, updatedStories));
+    }
+
+    return [stories, board, moveStory, updateStory, deleteStory, createStory] as const;
 }
 
