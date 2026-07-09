@@ -1,5 +1,7 @@
 import { useState } from "react";
 import BoardColumnElem from "./BoardColumnElem";
+import BoardHeader from "./BoardHeader";
+import StoryListView from "./StoryListView";
 import { StoryDetailsElem } from "./StoryDetailsElem";
 import '../css/Board.css';
 import { useTestHook } from "../hooks/UseTestHook";
@@ -10,11 +12,14 @@ type BoardProps = {
     error: string | null,
 }
 
+export type ViewMode = 'board' | 'list';
+
 const BoardElem = ({ isLoading, error }: BoardProps) => {
     const [stories, board, moveStory, updateStory, deleteStory, createStory] = useTestHook();
     const [selectedStoryId, setSelectedStoryId] = useState<number | null>(null);
     const [isCreatingStory, setIsCreatingStory] = useState(false);
     const [draftStory, setDraftStory] = useState<Story | null>(null);
+    const [viewMode, setViewMode] = useState<ViewMode>('board');
 
     const selectedStory = stories.find(s => s.id === selectedStoryId);
 
@@ -51,25 +56,34 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
                 <p>Loading. Please Wait...</p>
             ) : (
                 <>
-                    <div className="board-header">
-                        <div>
-                            <h2>{board.name}</h2>
-                            <p>{stories.length} stories (Click any card to edit)</p>
+                    <BoardHeader
+                        boardName={board.name}
+                        storyCount={stories.length}
+                        viewMode={viewMode}
+                        onViewModeChange={setViewMode}
+                        onCreateStory={openCreateStoryModal}
+                    />
+                    {viewMode === 'board' ? (
+                        <div className="board-columns">
+                            {board.columns.map((column) => (
+                                <BoardColumnElem
+                                    key={column.id}
+                                    column={column}
+                                    moveStory={moveStory}
+                                    onSelectStory={setSelectedStoryId}
+                                />
+                            ))}
                         </div>
-                        <button type="button" className="btn-primary" onClick={openCreateStoryModal}>
-                            Create Story
-                        </button>
-                    </div>
-                    <div className="board-columns">
-                        {board.columns.map((column) => (
-                            <BoardColumnElem
-                                key={column.id}
-                                column={column}
-                                moveStory={moveStory}
-                                onSelectStory={setSelectedStoryId}
-                            />
-                        ))}
-                    </div>
+                    ) : (
+                        <StoryListView
+                            stories={stories}
+                            onSelectStory={(storyId) => {
+                                setIsCreatingStory(false);
+                                setDraftStory(null);
+                                setSelectedStoryId(storyId);
+                            }}
+                        />
+                    )}
                 </>
             )}
 
