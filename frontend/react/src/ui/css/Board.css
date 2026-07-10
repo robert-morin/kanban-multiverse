@@ -121,6 +121,9 @@
     text-align: left;
     cursor: pointer;
     transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
 }
 
 .story-list-item:hover {
@@ -132,7 +135,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: 12px;
+    flex-grow: 1;
 }
 
 .story-list-item-main h4 {
@@ -159,7 +164,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 10px;
     color: var(--text);
     font-size: 13px;
 }
