@@ -78,6 +78,40 @@
     gap: 12px;
 }
 
+.story-list-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.story-list-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.story-list-control select,
+.story-list-filter input {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg);
+    color: var(--text-h);
+}
+
+.story-list-filter {
+    flex: 1;
+    min-width: 220px;
+}
+
+.story-list-filter input {
+    width: 100%;
+}
+
 .story-list-item {
     width: 100%;
     border: 1px solid var(--border);
