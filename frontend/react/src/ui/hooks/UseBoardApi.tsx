@@ -1,0 +1,96 @@
+import { useState, useEffect } from 'react'
+import type { Story } from '../../domain/Story';
+import { createBoard, type Board } from '../../domain/Board';
+import boardApi from '../../api/boardApi';
+import type { BoardDefinition } from '../../domain/BoardDefinition';
+
+export function useBoardApi() {
+    const [stories, setStories] = useState<Story[]>([]);
+    const [boardDefinition, setBoardDefinition] = useState<BoardDefinition | null>(null);
+    const [board, setBoard] = useState<Board | null>(null);
+
+    useEffect(() => {
+        boardApi.getStories()
+            .then((actualData) => {
+                setStories(actualData)
+            })
+            .catch((_) => {
+                setStories([])
+            })
+        boardApi.getBoardDefinition()
+            .then((actualData) => {
+                setBoardDefinition(actualData);
+                setBoard(createBoard(actualData, stories))
+            })
+            .catch((_) => {
+                setBoard(null)
+            })
+    }, [])
+
+    async function moveStory(storyId: number, newStatus: string) {
+        let movedStory: Story;
+        try {
+            movedStory = await boardApi.moveStory(storyId, newStatus)
+        } catch (error) {
+            console.error(`Error moving story ${storyId} to status ${newStatus}:`, error);
+            return
+        }
+        const updatedStories = stories.map(story => {
+            if (story.id === storyId) {
+                return movedStory;
+            }
+            return story;
+        });
+        setStories(_ => updatedStories);
+        if (boardDefinition) {
+            setBoard(_ => createBoard(boardDefinition, updatedStories));
+        }
+    }
+
+    async function updateStory(updatedStory: Story) {
+        let backendStory: Story
+        try {
+            backendStory = await boardApi.updateStory(updatedStory)
+        } catch (error) {
+            console.error(`Error updating story ${updatedStory.id}:`, error);
+            return;
+        }
+        const updatedStories = stories.map(story => {
+            if (story.id === updatedStory.id) {
+                return backendStory;
+            }
+            return story;
+        });
+        setStories(_ => updatedStories);
+        if (boardDefinition) {
+            setBoard(_ => createBoard(boardDefinition, updatedStories));
+        }
+    }
+
+    async function deleteStory(storyId: number) {
+        try {
+            await boardApi.deleteStory(storyId);
+        } catch (error) {
+            console.error(`Error deleting story ${storyId}:`, error);
+            return;
+        }
+    }
+
+    async function createStory(newStory: Story) {
+        let createdStory: Story
+        try {
+            createdStory = await boardApi.createStory(newStory);
+        } catch (error) {
+            console.error(`Error creating story:`, error);
+            return;
+        }
+        const updatedStories = [...stories, createdStory];
+        setStories(_ => updatedStories);
+        if (boardDefinition) {
+            setBoard(_ => createBoard(boardDefinition, updatedStories));
+        }
+    }
+
+    return [stories, board, moveStory, updateStory, deleteStory, createStory] as const;
+}
+

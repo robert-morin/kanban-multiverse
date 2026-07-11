@@ -4,8 +4,8 @@ import BoardHeader from "./BoardHeader";
 import StoryListView from "./StoryListView";
 import { StoryDetailsElem } from "./StoryDetailsElem";
 import '../css/Board.css';
-import { useTestHook } from "../hooks/UseTestHook";
 import type { Story } from "../../domain/Story";
+import { useBoardApi } from "../hooks/UseBoardApi";
 
 type BoardProps = {
     isLoading: boolean,
@@ -15,7 +15,7 @@ type BoardProps = {
 export type ViewMode = 'board' | 'list';
 
 const BoardElem = ({ isLoading, error }: BoardProps) => {
-    const [stories, board, moveStory, updateStory, deleteStory, createStory] = useTestHook();
+    const [stories, board, moveStory, updateStory, deleteStory, createStory] = useBoardApi();
     const [selectedStoryId, setSelectedStoryId] = useState<number | null>(null);
     const [isCreatingStory, setIsCreatingStory] = useState(false);
     const [draftStory, setDraftStory] = useState<Story | null>(null);
