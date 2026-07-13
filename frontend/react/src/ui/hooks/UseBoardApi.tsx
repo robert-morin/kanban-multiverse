@@ -11,19 +11,19 @@ export function useBoardApi() {
 
     useEffect(() => {
         boardApi.getStories()
-            .then((actualData) => {
-                setStories(actualData)
+            .then((newStories) => {
+                setStories(newStories)
+                boardApi.getBoardDefinition()
+                    .then((actualData) => {
+                        setBoardDefinition(actualData);
+                        setBoard(createBoard(actualData, newStories))
+                    })
+                    .catch((_) => {
+                        setBoard(null)
+                    })
             })
             .catch((_) => {
                 setStories([])
-            })
-        boardApi.getBoardDefinition()
-            .then((actualData) => {
-                setBoardDefinition(actualData);
-                setBoard(createBoard(actualData, stories))
-            })
-            .catch((_) => {
-                setBoard(null)
             })
     }, [])
 

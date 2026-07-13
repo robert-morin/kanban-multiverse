@@ -24,7 +24,7 @@ const moveStory = async (storyId: number, newStatus: string): Promise<Story> => 
         lastStatusUpdateDate: new Date()
     }
     const response = await fetch(
-        `${baseServerUrl}/stories/${storyId}`,
+        `${baseServerUrl}/story/${storyId}`,
         {
             method: 'PUT',
             headers: {
@@ -51,7 +51,7 @@ const updateStory = async (updatedStory: Story): Promise<Story> => {
         points: updatedStory.points
     }
     const response = await fetch(
-        `${baseServerUrl}/stories/${updatedStory.id}`,
+        `${baseServerUrl}/story/${updatedStory.id}`,
         {
             method: 'PUT',
             headers: {
@@ -67,7 +67,7 @@ const updateStory = async (updatedStory: Story): Promise<Story> => {
 }
 
 const deleteStory = async (storyId: number): Promise<void> => {
-    const response = await fetch(`${baseServerUrl}/stories/${storyId}`, {
+    const response = await fetch(`${baseServerUrl}/story/${storyId}`, {
         method: 'DELETE'
     })
     if (!response.ok) {
