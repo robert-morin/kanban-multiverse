@@ -3,7 +3,7 @@ import type { BoardDefinition } from '../domain/BoardDefinition'
 import type { Story } from '../domain/Story'
 
 const getStories = async (): Promise<Story[]> => {
-    const response = await fetch(`${baseServerUrl}/stories/`)
+    const response = await fetch(`${baseServerUrl}/stories`)
     if (!response.ok) {
         throw new Error('Stories could not be found.')
     }
@@ -11,7 +11,7 @@ const getStories = async (): Promise<Story[]> => {
 }
 
 const getBoardDefinition = async (): Promise<BoardDefinition> => {
-    const response = await fetch(`${baseServerUrl}/boardDefinition/`)
+    const response = await fetch(`${baseServerUrl}/boardDefinition`)
     if (!response.ok) {
         throw new Error('Board definition could not be found.')
     }

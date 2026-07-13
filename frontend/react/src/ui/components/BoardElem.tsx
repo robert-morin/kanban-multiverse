@@ -52,7 +52,7 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
             {error && (
                 <p>An error occurred: {error}</p>
             )}
-            {isLoading ? (
+            {isLoading || !board ? (
                 <p>Loading. Please Wait...</p>
             ) : (
                 <>
@@ -65,9 +65,9 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
                     />
                     {viewMode === 'board' ? (
                         <div className="board-columns">
-                            {board.columns.map((column) => (
+                            {board.columns.map((column, index) => (
                                 <BoardColumnElem
-                                    key={column.id}
+                                    key={index}
                                     column={column}
                                     moveStory={moveStory}
                                     onSelectStory={setSelectedStoryId}

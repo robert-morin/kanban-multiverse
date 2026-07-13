@@ -1,1 +1,1 @@
-export const baseServerUrl = 'http://localhost:2000'
+export const baseServerUrl = 'http://127.0.0.1:8080'

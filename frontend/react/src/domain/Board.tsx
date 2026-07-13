@@ -10,10 +10,9 @@ export type Board = {
 
 function createBoard(boardDefinition: BoardDefinition, stories: Story[]): Board {
     const columns: BoardColumn[] = boardDefinition.columns.map(columnDefinition => {
-        const columnStories = stories.filter(story => story.status === columnDefinition.title);
+        const columnStories = stories.filter(story => story.status === columnDefinition);
         return {
-            id: columnDefinition.id,
-            title: columnDefinition.title,
+            title: columnDefinition,
             stories: columnStories
         };
     });
