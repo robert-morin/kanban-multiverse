@@ -2,6 +2,7 @@ package com.example.demo.application;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.BoardRepository;
 import com.example.demo.domain.Story;
 import com.example.demo.domain.StoryRepository;
 import com.example.demo.domain.exceptions.StoryNotFoundException;
@@ -11,9 +12,23 @@ public class StoryService {
 
     private StoryRepository storyRepository;
     private StoryAssembler storyAssembler = new StoryAssembler();
+    private BoardRepository boardRepository;
 
-    public StoryService(StoryRepository repository) {
+    public StoryService(StoryRepository repository, BoardRepository boardRepository) {
         this.storyRepository = repository;
+        this.boardRepository = boardRepository;
+    }
+
+    public BoardDefinitionDto getBoardDefinition() {
+        return boardRepository.findById(1L)
+            .map(board -> {
+                BoardDefinitionDto dto = new BoardDefinitionDto();
+                dto.setId(board.getId());
+                dto.setName(board.getName());
+                dto.setColumns(board.getColumns().clone());
+                return dto;
+            })
+            .orElseThrow(() -> new RuntimeException("Board not found"));
     }
 
     public StoryDto[] getAllStories() {

@@ -33,6 +33,11 @@ public class StoryController {
     return storyService.getStoryById(id);
   }
 
+  @GetMapping("/boardDefinition")
+  public BoardDefinitionDto getBoardDefinition() {
+    return storyService.getBoardDefinition();
+  }
+
   @PostMapping("/story")
   @ResponseStatus(code = HttpStatus.CREATED)
   public StoryDto createStory(@RequestBody StoryContentsDto newStoryDto) {
