@@ -1,14 +1,14 @@
 export type Story = {
-    id: number
-    title: string
-    description: string
-    tags: string[]
-    owner: string
-    status: string
-    creationDate: Date
-    lastStatusUpdateDate: Date
-    points: number
-}
+	id: number;
+	title: string;
+	description: string;
+	tags: string[];
+	owner: string;
+	status: string;
+	creationDate: Date;
+	lastStatusUpdateDate: Date;
+	points: number;
+};
 
 /*
 const stories: StoryEntry[] = [

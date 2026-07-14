@@ -1,6 +1,6 @@
-import type { StoryEntry } from "./StoryEntry"
+import type { StoryEntry } from "./StoryEntry";
 
 export type BoardColumn = {
-    title: string,
-    stories: StoryEntry[]
-}
+	title: string;
+	stories: StoryEntry[];
+};
