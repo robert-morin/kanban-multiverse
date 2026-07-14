@@ -1,4 +1,4 @@
 export type BoardColumnDefinition = {
-	id: number;
+	position: number;
 	title: string;
 };

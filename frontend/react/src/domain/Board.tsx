@@ -15,10 +15,11 @@ function createBoard(
 	const columns: BoardColumn[] = boardDefinition.columns.map(
 		(columnDefinition) => {
 			const columnStories = stories.filter(
-				(story) => story.status === columnDefinition,
+				(story) => story.status === columnDefinition.title,
 			);
 			return {
-				title: columnDefinition,
+				title: columnDefinition.title,
+				position: columnDefinition.position,
 				stories: columnStories,
 			};
 		},

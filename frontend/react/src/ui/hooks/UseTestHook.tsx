@@ -6,7 +6,11 @@ import type { Story } from "../../domain/Story";
 const boardDefinition: BoardDefinition = {
 	id: 1,
 	name: "Example Board",
-	columns: ["To Do", "In Progress", "Done"],
+	columns: [
+		{ position: 0, title: "To Do" },
+		{ position: 1, title: "In Progress" },
+		{ position: 2, title: "Done" },
+	],
 };
 
 const defaultStories: Story[] = [

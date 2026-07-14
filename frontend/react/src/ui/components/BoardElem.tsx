@@ -48,6 +48,8 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 		setIsCreatingStory(true);
 	};
 
+	const storyToDisplay = selectedStory ?? (isCreatingStory ? draftStory : null);
+
 	return (
 		<div className="board">
 			{error && <p>An error occurred: {error}</p>}
@@ -64,9 +66,9 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 					/>
 					{viewMode === "board" ? (
 						<div className="board-columns">
-							{board.columns.map((column, index) => (
+							{board.columns.map((column) => (
 								<BoardColumnElem
-									key={index}
+									key={column.position}
 									column={column}
 									moveStory={moveStory}
 									onSelectStory={setSelectedStoryId}
@@ -86,11 +88,17 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 				</>
 			)}
 
-			{(selectedStory || (isCreatingStory && draftStory)) && (
-				<div className="story-details-overlay" onClick={closeStoryModal}>
-					<div onClick={(e) => e.stopPropagation()}>
+			{storyToDisplay && (
+				<div className="story-details-overlay">
+					<div
+						onClick={(e) => e.stopPropagation()}
+						onKeyDown={(e) => e.stopPropagation()}
+						role="dialog"
+						aria-modal="true"
+						tabIndex={-1}
+					>
 						<StoryDetailsElem
-							story={selectedStory ?? draftStory!}
+							story={storyToDisplay}
 							mode={isCreatingStory ? "create" : "edit"}
 							onSave={(updated: Story) => {
 								updateStory(updated);
