@@ -33,8 +33,7 @@ public class StoryAssembler {
             newStoryDto.description,
             newStoryDto.tags,
             newStoryDto.owner,
-            // Todo
-            "new",
+            newStoryDto.status,
             now,
             now,
             newStoryDto.points);

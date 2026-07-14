@@ -108,8 +108,8 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 								createStory(newStory);
 								closeStoryModal();
 							}}
-							onDelete={(storyId: number) => {
-								deleteStory(storyId);
+							onDelete={async (storyId: number) => {
+								await deleteStory(storyId);
 								closeStoryModal();
 							}}
 							onCancel={closeStoryModal}

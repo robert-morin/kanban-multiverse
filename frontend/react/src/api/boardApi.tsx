@@ -83,7 +83,7 @@ const createStory = async (newStory: Story): Promise<Story> => {
 		lastStatusUpdateDate: newStory.lastStatusUpdateDate,
 		points: newStory.points,
 	};
-	const response = await fetch(`${baseServerUrl}/stories`, {
+	const response = await fetch(`${baseServerUrl}/story`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

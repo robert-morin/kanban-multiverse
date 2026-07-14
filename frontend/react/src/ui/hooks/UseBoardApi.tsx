@@ -80,6 +80,11 @@ export function useBoardApi() {
 			console.error(`Error deleting story ${storyId}:`, error);
 			return;
 		}
+		const updatedStories = stories.filter((story) => story.id !== storyId);
+		setStories((_) => updatedStories);
+		if (boardDefinition) {
+			setBoard((_) => createBoard(boardDefinition, updatedStories));
+		}
 	}
 
 	async function createStory(newStory: Story) {
