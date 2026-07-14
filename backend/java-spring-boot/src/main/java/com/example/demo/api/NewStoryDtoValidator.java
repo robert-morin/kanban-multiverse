@@ -1,6 +1,6 @@
 package com.example.demo.api;
 
-import com.example.demo.application.StoryContentsDto;
+import com.example.demo.application.dto.StoryContentsDto;
 import com.example.demo.domain.exceptions.MissingParameterException;
 
 public class NewStoryDtoValidator {

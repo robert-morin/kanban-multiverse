@@ -2,7 +2,12 @@ package com.example.demo.application;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.application.dto.BoardDefinitionDto;
+import com.example.demo.application.dto.ColumnDefinitionDto;
+import com.example.demo.application.dto.StoryContentsDto;
+import com.example.demo.application.dto.StoryDto;
 import com.example.demo.domain.BoardRepository;
+import com.example.demo.domain.ColumnDefinition;
 import com.example.demo.domain.Story;
 import com.example.demo.domain.StoryRepository;
 import com.example.demo.domain.exceptions.StoryNotFoundException;
@@ -25,7 +30,14 @@ public class StoryService {
                 BoardDefinitionDto dto = new BoardDefinitionDto();
                 dto.setId(board.getId());
                 dto.setName(board.getName());
-                dto.setColumns(board.getColumns().clone());
+                dto.setColumns(board.getColumns().stream().map((ColumnDefinition column) -> 
+{
+                    ColumnDefinitionDto columnDto = new ColumnDefinitionDto();
+                    columnDto.setPosition(column.getPosition());
+                    columnDto.setTitle(column.getTitle());
+                    return columnDto;
+                }
+                ).toArray(ColumnDefinitionDto[]::new));
                 return dto;
             })
             .orElseThrow(() -> new RuntimeException("Board not found"));

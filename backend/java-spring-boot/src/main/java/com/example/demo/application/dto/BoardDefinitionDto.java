@@ -1,4 +1,4 @@
-package com.example.demo.application;
+package com.example.demo.application.dto;
 
 import lombok.Data;
 
@@ -6,5 +6,5 @@ import lombok.Data;
 public class BoardDefinitionDto {
     private Long id;
     private String name;
-    private String[] columns;
+    private ColumnDefinitionDto[] columns;
 }

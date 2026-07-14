@@ -1,6 +1,9 @@
 package com.example.demo.api;
 
 import com.example.demo.application.*;
+import com.example.demo.application.dto.BoardDefinitionDto;
+import com.example.demo.application.dto.StoryContentsDto;
+import com.example.demo.application.dto.StoryDto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

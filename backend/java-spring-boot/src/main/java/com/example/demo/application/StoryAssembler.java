@@ -3,6 +3,8 @@ package com.example.demo.application;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 
+import com.example.demo.application.dto.StoryContentsDto;
+import com.example.demo.application.dto.StoryDto;
 import com.example.demo.domain.Story;
 
 public class StoryAssembler {
