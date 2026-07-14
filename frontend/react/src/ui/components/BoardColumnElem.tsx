@@ -17,21 +17,21 @@ export default function BoardColumnElem({
 }: BoardColumnProps) {
 	const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-	function onDragOver(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragOver(ev: React.DragEvent<HTMLElement>) {
 		ev.preventDefault();
 	}
 
-	function onDragEnter(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragEnter(ev: React.DragEvent<HTMLElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(true);
 	}
 
-	function onDragLeave(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragLeave(ev: React.DragEvent<HTMLElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(false);
 	}
 
-	async function onDrop(ev: React.DragEvent<HTMLDivElement>) {
+	async function onDrop(ev: React.DragEvent<HTMLElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(false);
 		const data = ev.dataTransfer?.getData("text/plain");
@@ -42,8 +42,9 @@ export default function BoardColumnElem({
 	}
 
 	return (
-		<div
+		<section
 			className={`board-column ${isDraggingOver ? "dragging-over" : ""}`}
+			aria-label={`${column.title} column drop zone`}
 			onDragOver={onDragOver}
 			onDragEnter={onDragEnter}
 			onDragLeave={onDragLeave}
@@ -62,6 +63,6 @@ export default function BoardColumnElem({
 					/>
 				))}
 			</div>
-		</div>
+		</section>
 	);
 }
