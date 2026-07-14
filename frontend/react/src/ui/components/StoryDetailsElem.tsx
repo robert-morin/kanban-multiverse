@@ -71,7 +71,7 @@ export function StoryDetailsElem({
 		if (
 			points === undefined ||
 			points === null ||
-			isNaN(points) ||
+			Number.isNaN(points) ||
 			points < 0
 		) {
 			newErrors.points = "Points must be 0 or greater";

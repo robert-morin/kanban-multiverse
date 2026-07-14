@@ -17,7 +17,7 @@ export default function StoryTagsEditor({
 }: StoryTagsEditorProps) {
 	return (
 		<div className="form-group tags-editor-container">
-			<label>Tags</label>
+			<div>Tags</div>
 			<div className="tags-list">
 				{tags.map((tag) => (
 					<span key={tag} className="tag-badge">

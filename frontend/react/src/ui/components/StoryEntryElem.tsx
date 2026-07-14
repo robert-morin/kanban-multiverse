@@ -7,7 +7,7 @@ type StoryEntryProps = {
 };
 
 export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
-	function dragstartHandler(ev: React.DragEvent<HTMLDivElement>) {
+	function dragstartHandler(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.dataTransfer.effectAllowed = "move";
 		ev.dataTransfer.setData("text/plain", ev.currentTarget.id);
 	}
@@ -37,12 +37,13 @@ export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
 	};
 
 	return (
-		<div
+		<button
 			className="story-entry"
 			draggable
 			onDragStart={dragstartHandler}
 			id={story.id.toString()}
-			onClick={() => onSelect && onSelect(story.id)}
+			onClick={() => onSelect?.(story.id)}
+			type="button"
 		>
 			{story.tags && story.tags.length > 0 && (
 				<div className="card-tags">
@@ -55,8 +56,8 @@ export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
 			)}
 			<h4 className="card-title">{story.title}</h4>
 			<div className="card-footer">
-				{"points" in story && typeof (story as any).points === "number" && (
-					<span className="card-points">{(story as any).points} pts</span>
+				{"points" in story && typeof story.points === "number" && (
+					<span className="card-points">{story.points} pts</span>
 				)}
 				<div className="card-owner">
 					<div
@@ -69,6 +70,6 @@ export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
 					<span className="owner-name">{story.owner}</span>
 				</div>
 			</div>
-		</div>
+		</button>
 	);
 }

@@ -17,37 +17,38 @@ export default function BoardColumnElem({
 }: BoardColumnProps) {
 	const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-	function onDragOver(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragOver(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.preventDefault();
 	}
 
-	function onDragEnter(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragEnter(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(true);
 	}
 
-	function onDragLeave(ev: React.DragEvent<HTMLDivElement>) {
+	function onDragLeave(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(false);
 	}
 
-	async function onDrop(ev: React.DragEvent<HTMLDivElement>) {
+	async function onDrop(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.preventDefault();
 		setIsDraggingOver(false);
 		const data = ev.dataTransfer?.getData("text/plain");
 		if (data) {
-			console.log(`Dropped ${data} onto column ${column.id}`);
-			moveStory(parseInt(data), column.title);
+			console.log(`Dropped ${data} onto column ${column}`);
+			moveStory(parseInt(data, 10), column.title);
 		}
 	}
 
 	return (
-		<div
+		<button
 			className={`board-column ${isDraggingOver ? "dragging-over" : ""}`}
 			onDragOver={onDragOver}
 			onDragEnter={onDragEnter}
 			onDragLeave={onDragLeave}
 			onDrop={onDrop}
+			type="button"
 		>
 			<div className="column-header">
 				<h3 className="column-title">{column.title}</h3>
@@ -62,6 +63,6 @@ export default function BoardColumnElem({
 					/>
 				))}
 			</div>
-		</div>
+		</button>
 	);
 }
