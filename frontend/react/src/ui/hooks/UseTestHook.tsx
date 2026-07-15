@@ -49,7 +49,6 @@ const defaultStories: Story[] = [
 	},
 ];
 
-// Todo column Ids?
 export function useTestHook() {
 	const [stories, setStories] = useState<Story[]>(defaultStories);
 	const [board, setBoard] = useState<Board>(
