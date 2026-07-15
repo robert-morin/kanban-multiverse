@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -e
+
+# For each 2 level subdirectory, if a .husky folder is present, run it
+for dir in */*/; do
+	[ -d "${dir}.husky" ] || continue
+	hook="${dir}.husky/pre-commit"
+	if [ -f "$hook" ]; then
+		echo "Running $hook"
+		(
+			cd "$dir"
+			sh .husky/pre-commit
+		)
+	fi
+done
