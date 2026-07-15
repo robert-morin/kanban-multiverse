@@ -6,8 +6,8 @@ import StoryEntryElem from "./StoryEntryElem";
 
 type BoardColumnProps = {
 	column: BoardColumn;
-	moveStory: (storyId: number, newStatus: string) => void;
-	onSelectStory?: (storyId: number) => void;
+	moveStory: (storyId: string, newStatus: string) => void;
+	onSelectStory?: (storyId: string) => void;
 };
 
 export default function BoardColumnElem({
@@ -37,7 +37,7 @@ export default function BoardColumnElem({
 		const data = ev.dataTransfer?.getData("text/plain");
 		if (data) {
 			console.log(`Dropped ${data} onto column ${column.title}`);
-			moveStory(parseInt(data, 10), column.title);
+			moveStory(data, column.title);
 		}
 	}
 

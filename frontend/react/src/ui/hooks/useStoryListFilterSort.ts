@@ -44,7 +44,7 @@ export function useStoryListFilterSort({
 			if (leftValue > rightValue) {
 				return 1;
 			}
-			return left.id - right.id;
+			return left.id.localeCompare(right.id);
 		});
 
 		return sortDirection === "desc" ? sorted.reverse() : sorted;

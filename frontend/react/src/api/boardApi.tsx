@@ -19,7 +19,7 @@ const getBoardDefinition = async (): Promise<BoardDefinition> => {
 };
 
 const moveStory = async (
-	storyId: number,
+	storyId: string,
 	newStatus: string,
 ): Promise<Story> => {
 	const body = {
@@ -63,7 +63,7 @@ const updateStory = async (updatedStory: Story): Promise<Story> => {
 	return response.json();
 };
 
-const deleteStory = async (storyId: number): Promise<void> => {
+const deleteStory = async (storyId: string): Promise<void> => {
 	const response = await fetch(`${baseServerUrl}/story/${storyId}`, {
 		method: "DELETE",
 	});

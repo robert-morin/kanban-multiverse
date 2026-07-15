@@ -12,7 +12,7 @@ public class StoryAssembler {
 
     public StoryDto toDto(Story story) {
         return new StoryDto(
-            story.getId(),
+            String.valueOf(story.getId()),
             story.getTitle(),
             story.getDescription(),
             story.getTags(),

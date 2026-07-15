@@ -11,7 +11,7 @@ import StoryListItem from "./StoryListItem";
 
 type StoryListViewProps = {
 	stories: Story[];
-	onSelectStory: (storyId: number) => void;
+	onSelectStory: (storyId: string) => void;
 };
 
 export default function StoryListView({

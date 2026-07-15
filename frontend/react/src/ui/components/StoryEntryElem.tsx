@@ -3,7 +3,7 @@ import "../css/StoryEntry.css";
 
 type StoryEntryProps = {
 	story: StoryEntry;
-	onSelect?: (storyId: number) => void;
+	onSelect?: (storyId: string) => void;
 };
 
 export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {

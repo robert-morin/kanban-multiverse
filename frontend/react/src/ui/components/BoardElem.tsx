@@ -17,7 +17,7 @@ export type ViewMode = "board" | "list";
 const BoardElem = ({ isLoading, error }: BoardProps) => {
 	const [stories, board, moveStory, updateStory, deleteStory, createStory] =
 		useBoardApi();
-	const [selectedStoryId, setSelectedStoryId] = useState<number | null>(null);
+	const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
 	const [isCreatingStory, setIsCreatingStory] = useState(false);
 	const [draftStory, setDraftStory] = useState<Story | null>(null);
 	const [viewMode, setViewMode] = useState<ViewMode>("board");
@@ -25,7 +25,7 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 	const selectedStory = stories.find((s) => s.id === selectedStoryId);
 
 	const getEmptyStory = (): Story => ({
-		id: Math.max(0, ...stories.map((story) => story.id)) + 1,
+		id: `draft-${Date.now()}`,
 		title: "",
 		description: "",
 		tags: [],
@@ -108,7 +108,7 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 								createStory(newStory);
 								closeStoryModal();
 							}}
-							onDelete={async (storyId: number) => {
+							onDelete={async (storyId: string) => {
 								await deleteStory(storyId);
 								closeStoryModal();
 							}}

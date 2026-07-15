@@ -3,7 +3,7 @@ package com.example.demo.application.dto;
 import java.time.LocalDate;
 
 public record StoryDto(
-    long id,
+    String id,
     String title, 
     String description,
     String[] tags,

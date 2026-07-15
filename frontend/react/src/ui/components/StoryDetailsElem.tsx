@@ -11,7 +11,7 @@ type StoryDetailsElemProps = {
 	mode?: "edit" | "create";
 	onSave?: (updatedStory: Story) => void;
 	onCreate?: (newStory: Story) => void;
-	onDelete?: (storyId: number) => void;
+	onDelete?: (storyId: string) => void;
 	onCancel?: () => void;
 };
 

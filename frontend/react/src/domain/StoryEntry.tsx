@@ -1,5 +1,5 @@
 export type StoryEntry = {
-	id: number;
+	id: string;
 	title: string;
 	tags: string[];
 	owner: string;

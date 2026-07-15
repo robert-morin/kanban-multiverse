@@ -30,7 +30,7 @@ export function useBoardApi() {
 			});
 	}, []);
 
-	async function moveStory(storyId: number, newStatus: string) {
+	async function moveStory(storyId: string, newStatus: string) {
 		let movedStory: Story;
 		try {
 			movedStory = await boardApi.moveStory(storyId, newStatus);
@@ -73,7 +73,7 @@ export function useBoardApi() {
 		}
 	}
 
-	async function deleteStory(storyId: number) {
+	async function deleteStory(storyId: string) {
 		try {
 			await boardApi.deleteStory(storyId);
 		} catch (error) {

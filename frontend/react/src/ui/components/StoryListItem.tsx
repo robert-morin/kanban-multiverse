@@ -2,7 +2,7 @@ import type { Story } from "../../domain/Story";
 
 type StoryListItemProps = {
 	story: Story;
-	onSelect: (storyId: number) => void;
+	onSelect: (storyId: string) => void;
 };
 
 export default function StoryListItem({ story, onSelect }: StoryListItemProps) {

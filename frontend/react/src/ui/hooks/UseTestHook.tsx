@@ -15,7 +15,7 @@ const boardDefinition: BoardDefinition = {
 
 const defaultStories: Story[] = [
 	{
-		id: 1,
+		id: "1",
 		title: "Implement login feature",
 		description: "This is the first story",
 		tags: ["authentication", "frontend"],
@@ -26,7 +26,7 @@ const defaultStories: Story[] = [
 		points: 5,
 	},
 	{
-		id: 2,
+		id: "2",
 		title: "Implement other feature",
 		description: "This is the second story",
 		tags: ["authentication", "foo"],
@@ -37,7 +37,7 @@ const defaultStories: Story[] = [
 		points: 3,
 	},
 	{
-		id: 3,
+		id: "3",
 		title: "Implement third feature",
 		description: "This is the third story",
 		tags: ["backend", "database"],
@@ -56,7 +56,7 @@ export function useTestHook() {
 		createBoard(boardDefinition, stories),
 	);
 
-	function moveStory(storyId: number, newStatus: string) {
+	function moveStory(storyId: string, newStatus: string) {
 		const updatedStories = stories.map((story) => {
 			if (story.id === storyId) {
 				console.log(`Moving story ${storyId} to status ${newStatus}`);
@@ -84,7 +84,7 @@ export function useTestHook() {
 		setBoard((_) => createBoard(boardDefinition, updatedStories));
 	}
 
-	function deleteStory(storyId: number) {
+	function deleteStory(storyId: string) {
 		const updatedStories = stories.filter((story) => story.id !== storyId);
 		setStories((_) => updatedStories);
 		setBoard((_) => createBoard(boardDefinition, updatedStories));
