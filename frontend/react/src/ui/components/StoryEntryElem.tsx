@@ -4,9 +4,11 @@ import "../css/StoryEntry.css";
 type StoryEntryProps = {
 	story: StoryEntry;
 	onSelect?: (storyId: string) => void;
+	moveStoryPreviousStatus: () => void;
+	moveStoryNextStatus: () => void;
 };
 
-export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
+export default function StoryEntryEntry({ story, onSelect, moveStoryPreviousStatus, moveStoryNextStatus }: StoryEntryProps) {
 	function dragstartHandler(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.dataTransfer.effectAllowed = "move";
 		ev.dataTransfer.setData("text/plain", ev.currentTarget.id);
@@ -36,6 +38,14 @@ export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
 		return colors[sum % colors.length];
 	};
 
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+		if (e.key === "ArrowLeft") {
+			moveStoryPreviousStatus();
+		} else if (e.key === "ArrowRight") {
+			moveStoryNextStatus();
+		}
+	};
+
 	return (
 		<button
 			className="story-entry"
@@ -43,6 +53,7 @@ export default function StoryEntryEntry({ story, onSelect }: StoryEntryProps) {
 			onDragStart={dragstartHandler}
 			id={story.id.toString()}
 			onClick={() => onSelect?.(story.id)}
+			onKeyDown={handleKeyDown}
 			type="button"
 		>
 			{story.tags && story.tags.length > 0 && (

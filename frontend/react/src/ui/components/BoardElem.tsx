@@ -24,6 +24,24 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 
 	const selectedStory = stories.find((s) => s.id === selectedStoryId);
 
+	const getPreviousStatus = (currentStatus: string): string => {
+		const statuses = board?.columns.map((col) => col.title) || [];
+		const currentIndex = statuses.indexOf(currentStatus);
+		if (currentIndex > 0) {
+			return statuses[currentIndex - 1];
+		}
+		return currentStatus; // If already at the first status, return the same
+	}
+
+	const getNextStatus = (currentStatus: string): string => {
+		const statuses = board?.columns.map((col) => col.title) || [];
+		const currentIndex = statuses.indexOf(currentStatus);
+		if (currentIndex < statuses.length - 1) {
+			return statuses[currentIndex + 1];
+		}
+		return currentStatus; // If already at the last status, return the same
+	}
+
 	const getEmptyStory = (): Story => ({
 		id: `draft-${Date.now()}`,
 		title: "",
@@ -72,6 +90,8 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 									column={column}
 									moveStory={moveStory}
 									onSelectStory={setSelectedStoryId}
+									getPreviousStatus={getPreviousStatus}
+									getNextStatus={getNextStatus}
 								/>
 							))}
 						</div>

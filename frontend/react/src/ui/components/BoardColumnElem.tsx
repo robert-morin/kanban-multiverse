@@ -8,12 +8,16 @@ type BoardColumnProps = {
 	column: BoardColumn;
 	moveStory: (storyId: string, newStatus: string) => void;
 	onSelectStory?: (storyId: string) => void;
+	getPreviousStatus: (currentStatus: string) => string;
+	getNextStatus: (currentStatus: string) => string;
 };
 
 export default function BoardColumnElem({
 	column,
 	moveStory,
 	onSelectStory,
+	getPreviousStatus,
+	getNextStatus,
 }: BoardColumnProps) {
 	const [isDraggingOver, setIsDraggingOver] = useState(false);
 
@@ -60,6 +64,8 @@ export default function BoardColumnElem({
 						key={story.id}
 						story={story}
 						onSelect={onSelectStory}
+						moveStoryPreviousStatus={() => moveStory(story.id, getPreviousStatus(column.title))}
+						moveStoryNextStatus={() => moveStory(story.id, getNextStatus(column.title))}
 					/>
 				))}
 			</div>
