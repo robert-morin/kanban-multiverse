@@ -8,7 +8,12 @@ type StoryEntryProps = {
 	moveStoryNextStatus: () => void;
 };
 
-export default function StoryEntryEntry({ story, onSelect, moveStoryPreviousStatus, moveStoryNextStatus }: StoryEntryProps) {
+export default function StoryEntryEntry({
+	story,
+	onSelect,
+	moveStoryPreviousStatus,
+	moveStoryNextStatus,
+}: StoryEntryProps) {
 	function dragstartHandler(ev: React.DragEvent<HTMLButtonElement>) {
 		ev.dataTransfer.effectAllowed = "move";
 		ev.dataTransfer.setData("text/plain", ev.currentTarget.id);

@@ -64,8 +64,12 @@ export default function BoardColumnElem({
 						key={story.id}
 						story={story}
 						onSelect={onSelectStory}
-						moveStoryPreviousStatus={() => moveStory(story.id, getPreviousStatus(column.title))}
-						moveStoryNextStatus={() => moveStory(story.id, getNextStatus(column.title))}
+						moveStoryPreviousStatus={() =>
+							moveStory(story.id, getPreviousStatus(column.title))
+						}
+						moveStoryNextStatus={() =>
+							moveStory(story.id, getNextStatus(column.title))
+						}
 					/>
 				))}
 			</div>

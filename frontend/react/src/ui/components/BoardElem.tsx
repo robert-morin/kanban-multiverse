@@ -31,7 +31,7 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 			return statuses[currentIndex - 1];
 		}
 		return currentStatus; // If already at the first status, return the same
-	}
+	};
 
 	const getNextStatus = (currentStatus: string): string => {
 		const statuses = board?.columns.map((col) => col.title) || [];
@@ -40,7 +40,7 @@ const BoardElem = ({ isLoading, error }: BoardProps) => {
 			return statuses[currentIndex + 1];
 		}
 		return currentStatus; // If already at the last status, return the same
-	}
+	};
 
 	const getEmptyStory = (): Story => ({
 		id: `draft-${Date.now()}`,
