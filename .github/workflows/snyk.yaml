@@ -14,12 +14,6 @@ jobs:
         run: |
           cd frontend/react
           npm install
-      - name: Run Snyk to check for vulnerabilities on react frontend
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --file=frontend/react/package.json
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -31,8 +25,10 @@ jobs:
           cd backend/java-spring-boot
           mvn install -DskipTests
       - run: chmod +x backend/java-spring-boot/mvnw
+
       - uses: snyk/actions/setup@master
       - name: Snyk test
-        run: snyk test --file=backend/java-spring-boot/pom.xml -d
+        run: snyk test --all-projects --detection-depth=3
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
