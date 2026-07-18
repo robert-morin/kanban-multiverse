@@ -31,10 +31,11 @@ jobs:
         run: |
           cd backend/java-spring-boot
           mvn install -DskipTests
-      - run: ls -la backend/java-spring-boot
-             echo mvn -version
-             echo java -version
-             echo $JAVA_HOME
+      - run: |
+          ls -la backend/java-spring-boot
+          echo mvn -version
+          echo java -version
+          echo $JAVA_HOME
       - run: chmod +x backend/java-spring-boot/mvnw
       - name: Run Snyk to check for vulnerabilities on java-spring-boot backend
         uses: snyk/actions/maven@master
