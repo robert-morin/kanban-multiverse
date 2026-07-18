@@ -21,9 +21,9 @@ jobs:
         with:
           args: --file=frontend/react/package.json
 
-      - name: Run Snyk to check for vulnerabilities on maven backend
+      - name: Run Snyk to check for vulnerabilities on java-spring-boot backend
         uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --scan-all-unmanaged
+          args: --file=backend/java-spring-boot/pom.xml -d
