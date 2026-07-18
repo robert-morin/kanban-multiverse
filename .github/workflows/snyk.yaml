@@ -5,13 +5,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies for frontend
+        run: |
+          cd frontend/react
+          npm install
+      - name: Run Snyk to check for vulnerabilities on react frontend
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --file=frontend/react/package.json
-      - name: Run Snyk to check for vulnerabilities
+
+      - name: Run Snyk to check for vulnerabilities on java-spring-boot backend
         uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
