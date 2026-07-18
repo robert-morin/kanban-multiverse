@@ -31,8 +31,9 @@ jobs:
           cd backend/java-spring-boot
           mvn install -DskipTests
       - run: chmod +x backend/java-spring-boot/mvnw
-      - name: Run Snyk to check for vulnerabilities on java-spring-boot backend
-        uses: snyk/actions/maven-3-jdk-25@master
+      - uses: snyk/actions/setup@master
+      - name: Snyk test
+        run: snyk test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
