@@ -33,8 +33,6 @@ jobs:
       - run: chmod +x backend/java-spring-boot/mvnw
       - uses: snyk/actions/setup@master
       - name: Snyk test
-        run: snyk test
+        run: snyk test --file=backend/java-spring-boot/pom.xml -d
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --file=backend/java-spring-boot/pom.xml -d
