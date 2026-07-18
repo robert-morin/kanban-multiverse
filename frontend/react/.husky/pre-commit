@@ -1,2 +1,4 @@
 npm run --if-present test
 npx @biomejs/biome check --write
+snyk auth
+snyk test
