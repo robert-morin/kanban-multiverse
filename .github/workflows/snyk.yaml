@@ -21,6 +21,17 @@ jobs:
         with:
           args: --file=frontend/react/package.json
 
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies for backend
+        run: |
+          cd backend/java-spring-boot
+          mvn install -DskipTests
+
       - name: Run Snyk to check for vulnerabilities on java-spring-boot backend
         uses: snyk/actions/maven@master
         env:
