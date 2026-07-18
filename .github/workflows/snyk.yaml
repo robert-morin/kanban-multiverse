@@ -29,6 +29,5 @@ jobs:
       - uses: snyk/actions/setup@master
       - name: Snyk test
         run: snyk test --all-projects --detection-depth=3
-        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
