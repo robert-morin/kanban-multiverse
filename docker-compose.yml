@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./backend/java-spring-boot
+      dockerfile: Dockerfile
+    image: kanban-backend:local
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend/react
+      dockerfile: Dockerfile
+    image: kanban-frontend:local
+    depends_on:
+      - backend
+    ports:
+      - "3000:8080"
+    restart: unless-stopped
